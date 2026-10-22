@@ -5,13 +5,14 @@ import hmac
 import os
 import secrets
 import sqlite3
+import time
 from contextlib import asynccontextmanager, contextmanager
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
 
 import jwt
-from fastapi import Depends, FastAPI, HTTPException, Query, status
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -75,6 +76,8 @@ def init_db() -> None:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT NOT NULL UNIQUE COLLATE NOCASE,
                 password_hash TEXT NOT NULL,
+                role TEXT NOT NULL DEFAULT 'user'
+                    CHECK(role IN ('user', 'admin')),
                 created_at TEXT NOT NULL
             );
 
@@ -103,8 +106,26 @@ def init_db() -> None:
                 ON accounts(owner_user_id);
             CREATE INDEX IF NOT EXISTS idx_transactions_account_date
                 ON transactions(account_id, transaction_date);
+
+            CREATE TABLE IF NOT EXISTS login_attempts (
+                email TEXT NOT NULL,
+                client_ip TEXT NOT NULL,
+                failed_count INTEGER NOT NULL DEFAULT 0,
+                window_start REAL NOT NULL,
+                blocked_until REAL NOT NULL DEFAULT 0,
+                PRIMARY KEY (email, client_ip)
+            );
             """
         )
+        # Migrate existing databases without losing user data.
+        user_columns = {
+            row["name"] for row in conn.execute("PRAGMA table_info(users)").fetchall()
+        }
+        if "role" not in user_columns:
+            conn.execute(
+                "ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user' "
+                "CHECK(role IN ('user', 'admin'))"
+            )
 
 
 @asynccontextmanager
@@ -219,7 +240,7 @@ def get_current_user(
 
     with get_connection() as conn:
         user = conn.execute(
-            "SELECT id, email FROM users WHERE id = ?", (user_id,)
+            "SELECT id, email, role FROM users WHERE id = ?", (user_id,)
         ).fetchone()
 
     if user is None:
@@ -229,7 +250,21 @@ def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    return {"id": user["id"], "email": user["email"]}
+    return {
+        "id": user["id"],
+        "email": user["email"],
+        "role": user["role"],
+    }
+
+
+def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
+    """Allow only users whose role is assigned server-side as admin."""
+    if current_user["role"] != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Administrator access required",
+        )
+    return current_user
 
 
 def require_owned_account(account_id: int, user_id: int) -> dict:
@@ -312,17 +347,98 @@ def register(body: RegisterRequest) -> dict:
     }
 
 
+MAX_LOGIN_ATTEMPTS = 5
+LOGIN_WINDOW_SECONDS = 900
+LOCKOUT_SECONDS = 900
+
+
+def check_login_blocked(email: str, client_ip: str) -> bool:
+    now = time.time()
+
+    with get_connection() as conn:
+        row = conn.execute(
+            """
+            SELECT blocked_until
+            FROM login_attempts
+            WHERE email = ? AND client_ip = ?
+            """,
+            (email, client_ip),
+        ).fetchone()
+
+    return row is not None and row["blocked_until"] > now
+
+
+def record_failed_login(email: str, client_ip: str) -> None:
+    now = time.time()
+
+    with get_connection() as conn:
+        row = conn.execute(
+            """
+            SELECT failed_count, window_start
+            FROM login_attempts
+            WHERE email = ? AND client_ip = ?
+            """,
+            (email, client_ip),
+        ).fetchone()
+
+        if row is None or now - row["window_start"] >= LOGIN_WINDOW_SECONDS:
+            failed_count = 1
+            window_start = now
+        else:
+            failed_count = row["failed_count"] + 1
+            window_start = row["window_start"]
+
+        blocked_until = (
+            now + LOCKOUT_SECONDS
+            if failed_count >= MAX_LOGIN_ATTEMPTS
+            else 0
+        )
+
+        conn.execute(
+            """
+            INSERT INTO login_attempts
+                (email, client_ip, failed_count, window_start, blocked_until)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(email, client_ip) DO UPDATE SET
+                failed_count = excluded.failed_count,
+                window_start = excluded.window_start,
+                blocked_until = excluded.blocked_until
+            """,
+            (email, client_ip, failed_count, window_start, blocked_until),
+        )
+
+
+def clear_login_attempts(email: str, client_ip: str) -> None:
+    with get_connection() as conn:
+        conn.execute(
+            "DELETE FROM login_attempts WHERE email = ? AND client_ip = ?",
+            (email, client_ip),
+        )
+
+
 @app.post("/auth/login")
-def login(body: LoginRequest) -> dict:
+def login(body: LoginRequest, request: Request) -> dict:
+    email = body.email.strip().lower()
+    client_ip = request.client.host if request.client else "unknown"
+
+    if check_login_blocked(email, client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Too many failed login attempts. Try again later.",
+        )
+
     with get_connection() as conn:
         user = conn.execute(
             "SELECT id, email, password_hash FROM users WHERE email = ?",
-            (body.email.strip().lower(),),
+            (email,),
         ).fetchone()
 
     # Same error for unknown email and incorrect password.
     if user is None or not verify_password(body.password, user["password_hash"]):
+        record_failed_login(email, client_ip)
         raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    clear_login_attempts(email, client_ip)
 
     return {
         "access_token": create_access_token(user["id"]),
@@ -334,6 +450,18 @@ def login(body: LoginRequest) -> dict:
 @app.get("/me")
 def me(current_user: dict = Depends(get_current_user)) -> dict:
     return {"user_id": current_user["id"], "email": current_user["email"]}
+
+
+@app.get("/admin/users")
+def list_users_for_admin(
+    current_admin: dict = Depends(require_admin),
+) -> dict:
+    """List basic user details; access is restricted to database-assigned admins."""
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT id, email, role, created_at FROM users ORDER BY id"
+        ).fetchall()
+    return {"users": [dict(row) for row in rows]}
 
 
 @app.get("/accounts")

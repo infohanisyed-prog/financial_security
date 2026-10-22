@@ -1,4 +1,3 @@
-
 import os
 
 # Use a dedicated test secret, not a production secret.
@@ -111,6 +110,30 @@ def test_login_with_wrong_password_rejected(client):
     )
 
     assert response.status_code == 401
+
+
+def test_login_rate_limit(client):
+    register_user(client)
+
+    for _ in range(5):
+        response = client.post(
+            "/auth/login",
+            json={
+                "email": "user1@example.com",
+                "password": "WrongPassword123!",
+            },
+        )
+        assert response.status_code == 401
+
+    response = client.post(
+        "/auth/login",
+        json={
+            "email": "user1@example.com",
+            "password": "SecurePass123!",
+        },
+    )
+
+    assert response.status_code == 429
 
 
 def test_protected_profile_requires_token(client):
@@ -259,3 +282,146 @@ def test_invalid_report_date_range_rejected(client):
     )
 
     assert response.status_code == 422
+
+
+def test_tampered_token_rejected(client):
+    register_user(client)
+    token = login_user(client)
+
+    # Alter the token signature so it can no longer be trusted.
+    parts = token.split(".")
+    assert len(parts) == 3
+    parts[2] = ("A" if parts[2][0] != "A" else "B") + parts[2][1:]
+    tampered_token = ".".join(parts)
+
+    response = client.get("/me", headers=auth_header(tampered_token))
+
+    assert response.status_code == 401
+
+
+def test_expired_token_rejected(client):
+    register_user(client)
+    expired_token = security.jwt.encode(
+        {
+            "sub": "1",
+            "iat": security.utc_now() - security.timedelta(minutes=10),
+            "exp": security.utc_now() - security.timedelta(minutes=5),
+        },
+        security.JWT_SECRET,
+        algorithm=security.JWT_ALGORITHM,
+    )
+
+    response = client.get("/me", headers=auth_header(expired_token))
+
+    assert response.status_code == 401
+
+
+def test_token_signed_with_wrong_secret_rejected(client):
+    register_user(client)
+    invalid_token = security.jwt.encode(
+        {
+            "sub": "1",
+            "iat": security.utc_now(),
+            "exp": security.utc_now() + security.timedelta(minutes=5),
+        },
+        "different-test-secret-that-is-not-valid",
+        algorithm=security.JWT_ALGORITHM,
+    )
+
+    response = client.get("/me", headers=auth_header(invalid_token))
+
+    assert response.status_code == 401
+
+
+def test_regular_user_cannot_access_admin_endpoint(client):
+    register_user(client)
+    token = login_user(client)
+
+    response = client.get("/admin/users", headers=auth_header(token))
+
+    assert response.status_code == 403
+
+
+def test_user_cannot_assign_self_admin_role_during_registration(client):
+    response = client.post(
+        "/auth/register",
+        json={
+            "email": "selfadmin@example.com",
+            "password": "SecurePass123!",
+            "account_name": "Regular Account",
+            "role": "admin",
+        },
+    )
+    assert response.status_code == 201
+
+    with security.get_connection() as conn:
+        row = conn.execute(
+            "SELECT role FROM users WHERE email = ?",
+            ("selfadmin@example.com",),
+        ).fetchone()
+
+    assert row["role"] == "user"
+
+
+def test_admin_can_access_admin_endpoint(client):
+    register_user(client, "admin@example.com")
+    token = login_user(client, "admin@example.com")
+
+    # Admin provisioning is an operator/database action, never public registration.
+    with security.get_connection() as conn:
+        conn.execute(
+            "UPDATE users SET role = 'admin' WHERE email = ?",
+            ("admin@example.com",),
+        )
+
+    response = client.get("/admin/users", headers=auth_header(token))
+
+    assert response.status_code == 200
+    assert response.json()["users"][0]["role"] == "admin"
+
+
+def test_password_is_stored_as_hash(client):
+    register_user(client, "hashcheck@example.com")
+
+    with security.get_connection() as conn:
+        row = conn.execute(
+            "SELECT password_hash FROM users WHERE email = ?",
+            ("hashcheck@example.com",),
+        ).fetchone()
+
+    assert row is not None
+    assert row["password_hash"] != "SecurePass123!"
+    assert "$" in row["password_hash"]
+    assert security.verify_password("SecurePass123!", row["password_hash"])
+    assert not security.verify_password("WrongPassword123!", row["password_hash"])
+
+
+def test_database_persists_across_app_restart(tmp_path, monkeypatch):
+    test_db = tmp_path / "persistent_expenses.db"
+    monkeypatch.setattr(security, "DB_PATH", test_db)
+
+    with TestClient(security.app) as first_client:
+        response = first_client.post(
+            "/auth/register",
+            json={
+                "email": "persist@example.com",
+                "password": "SecurePass123!",
+                "account_name": "Persistent Account",
+            },
+        )
+        assert response.status_code == 201
+
+    # A new TestClient context simulates restarting the app against the same DB.
+    with TestClient(security.app) as second_client:
+        response = second_client.post(
+            "/auth/login",
+            json={
+                "email": "persist@example.com",
+                "password": "SecurePass123!",
+            },
+        )
+        assert response.status_code == 200
+        token = response.json()["access_token"]
+        profile = second_client.get("/me", headers=auth_header(token))
+        assert profile.status_code == 200
+        assert profile.json()["email"] == "persist@example.com"
