@@ -1,0 +1,19 @@
+BLOCK	faq-001	missing audit metadata: source_owner, last_verified_date
+BLOCK	faq-001	not explicitly approved and verified
+BLOCK	faq-002	missing audit metadata: source_owner, last_verified_date
+BLOCK	faq-002	not explicitly approved and verified
+BLOCK	faq-003	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	faq-003	not explicitly approved and verified
+BLOCK	security-001	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	security-001	not explicitly approved and verified
+BLOCK	security-002	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	security-002	not explicitly approved and verified
+BLOCK	security-003	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	security-003	not explicitly approved and verified
+BLOCK	security-004	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	security-004	not explicitly approved and verified
+BLOCK	security-005	missing audit metadata: source_owner, source_url, last_verified_date
+BLOCK	security-005	not explicitly approved and verified
+
+Documents: 8 | Findings: 16 | Blocking findings: 16
+Policy: do not index blocked documents until reviewed and approved.

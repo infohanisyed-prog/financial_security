@@ -1,0 +1,267 @@
+{
+  "kb_version": "1.1.0",
+  "updated_at": "2026-10-19",
+  "audit_generated_date": "2026-10-27",
+  "audit_status": "REVIEW_REQUIRED",
+  "audit_policy": "No document is eligible for production indexing until source approval and required metadata are supplied.",
+  "duplicate_content_groups": [],
+  "duplicate_aliases": [],
+  "privacy_matches": [],
+  "documents": [
+    {
+      "id": "faq-001",
+      "title": "What is HisabDo?",
+      "type": "faq",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "Official HisabDo FAQ — product description requires review",
+      "aliases": [
+        "What does HisabDo do?",
+        "What is the purpose of HisabDo?",
+        "Explain HisabDo",
+        "HisabDo kya hai?",
+        "HisabDo kis kaam aata hai?",
+        "Mujhe HisabDo ke bare mein batao"
+      ],
+      "content": "HisabDo is an expense management assistant intended to help users organize expense-related information. Confirm its exact features against official product documentation before publishing this answer.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": "https://hisabdo.app/faq",
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "faq-002",
+      "title": "How can I track an expense?",
+      "type": "faq",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "HisabDo expense workflow — application access unavailable; steps require verification",
+      "aliases": [
+        "How do I record an expense?",
+        "How can I add a new expense?",
+        "How do I manage my spending?",
+        "How can I track my expenses?",
+        "Main apna expense kaise record karun?",
+        "Kharcha kaise add karun?",
+        "Apne expenses ka record kaise rakhoon?"
+      ],
+      "content": "Use the expense-entry workflow available in the deployed HisabDo application to record an expense. The exact fields and steps depend on the current implementation and must be verified against the application.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": "https://hisabdo.app/faq",
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "faq-003",
+      "title": "What should I do if the chatbot does not know an answer?",
+      "type": "faq",
+      "version": "1.1.0",
+      "verified": true,
+      "source": "Internal knowledge-base safety policy",
+      "aliases": [
+        "Agar chatbot ko kisi sawal ka jawab nahi pata, to mujhe kya karna chahiye?",
+        "Agar bot answer nahi janta to main kya karun?",
+        "Chatbot ko jawab na mile to kya karna chahiye?",
+        "What if the chatbot cannot answer my question?",
+        "Bot ko meri baat samajh nahi aa rahi, ab kya karun?",
+        "What happens when no relevant source is found?"
+      ],
+      "content": "If no sufficiently relevant, verified knowledge-base source is found, the chatbot should say it cannot confirm the answer and ask the user to clarify or consult the official support channel. It must not invent product details.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "verified=true in source file, but approval evidence and source metadata are missing.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details.",
+          "Safety policy retained; formal approval and source ownership have not been established."
+        ]
+      }
+    },
+    {
+      "id": "security-001",
+      "title": "How can I protect my financial account?",
+      "type": "security",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "General security guidance — review required before publication",
+      "aliases": [
+        "How do I secure my account?",
+        "How can I keep my financial information safe?",
+        "How do I protect my expense management account?",
+        "How can I prevent unauthorized access?",
+        "Apna financial account secure kaise karun?",
+        "Account ko hackers se kaise bachaoon?",
+        "Meri financial information safe kaise rahegi?"
+      ],
+      "content": "Use a unique, strong password and enable multi-factor authentication if the application supports it. Never share passwords, one-time codes, or authentication tokens. Keep devices and browsers updated, sign out of shared devices, and report suspicious account activity through the official support channel. Verify the application's actual security features before making product-specific claims.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "security-002",
+      "title": "How should passwords be protected?",
+      "type": "security",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "General application security guidance — backend review required",
+      "aliases": [
+        "How should an application store passwords?",
+        "Are passwords stored as plain text?",
+        "How can I protect user passwords?",
+        "Password security best practices",
+        "Passwords ko securely kaise store karna chahiye?",
+        "Plain text password kyun unsafe hai?",
+        "User password ko hash kaise karte hain?"
+      ],
+      "content": "Applications should not store passwords in plain text. Passwords should be processed with a suitable password-hashing algorithm and appropriate parameters, such as Argon2id or an appropriately configured bcrypt implementation. Password verification should use the corresponding password-hashing library. Review the actual backend implementation before claiming that HisabDo follows these practices.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "security-003",
+      "title": "How should authentication tokens be protected?",
+      "type": "security",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "General application security guidance — backend review required",
+      "aliases": [
+        "How do I secure a JWT token?",
+        "What is JWT security?",
+        "How should access tokens be handled?",
+        "How can token theft be prevented?",
+        "JWT token ko secure kaise karun?",
+        "Authentication token kisi ke saath share karna chahiye?",
+        "Demo token endpoint ko kaise secure karein?"
+      ],
+      "content": "Authentication tokens should be protected from disclosure and unauthorized use. Use HTTPS in deployed environments, keep signing secrets out of source control, validate token signatures and relevant claims on the server, and apply suitable expiration and revocation strategies. Development-only token endpoints should not be exposed in production. Confirm the application's token validation, secret management, and endpoint configuration before claiming these controls are implemented.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "security-004",
+      "title": "What should I do about suspicious financial activity?",
+      "type": "security",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "General financial security guidance — review required before publication",
+      "aliases": [
+        "What if I see an unauthorized transaction?",
+        "How do I report suspicious account activity?",
+        "Someone accessed my financial account",
+        "What should I do if my account is compromised?",
+        "Agar suspicious transaction nazar aaye to kya karun?",
+        "Mere account mein unauthorized activity ho rahi hai",
+        "Agar account hack ho jaye to kya karna chahiye?"
+      ],
+      "content": "If you notice suspicious activity, contact the relevant financial institution or official service support promptly. If banking or payment credentials may be compromised, contact the institution using a trusted official channel and follow its instructions to secure the account. Change compromised passwords from a trusted device and review recent account activity. Do not share authentication codes or passwords with anyone claiming to provide support.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    },
+    {
+      "id": "security-005",
+      "title": "How can an application reduce unauthorized login attempts?",
+      "type": "security",
+      "version": "1.1.0",
+      "verified": false,
+      "source": "General backend security guidance — implementation review required",
+      "aliases": [
+        "How do I prevent brute-force login attacks?",
+        "Why is login rate limiting important?",
+        "How should login attempts be limited?",
+        "How can I secure a login API?",
+        "Login attempts par rate limiting kyun lagani chahiye?",
+        "Brute force attack se login ko kaise bachayein?",
+        "Demo login endpoint ko production mein kaise restrict karein?"
+      ],
+      "content": "Authentication endpoints should use appropriately configured rate limiting and abuse protections. Applications should validate credentials on the server, avoid revealing whether a username or password was incorrect in a way that enables account enumeration, and monitor suspicious login activity. The exact controls and thresholds must be selected for the application's risk and architecture. Verify the deployed backend before claiming these protections are active.",
+      "audit": {
+        "approval_status": "pending",
+        "source_owner": null,
+        "source_url": null,
+        "last_verified_date": null,
+        "review_policy": "Set by source owner before approval; review before expiry or source change",
+        "privacy_review": "pending",
+        "indexing_eligible": false,
+        "audit_notes": [
+          "Document is marked unverified in source knowledge base.",
+          "Owner, official URL, last-verified date, and explicit approval evidence not supplied.",
+          "No authorized review/feedback source supplied; do not store reviewer identities or private details."
+        ]
+      }
+    }
+  ]
+}
