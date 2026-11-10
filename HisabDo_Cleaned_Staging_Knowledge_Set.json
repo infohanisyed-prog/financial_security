@@ -1,0 +1,331 @@
+{
+  "dataset": "HisabDo Department 3 normalized staging set",
+  "generated_on": "2026-11-10",
+  "note": "Normalized structure only. All 8 records remain quarantined; none is approved for production ingestion.",
+  "metadata_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "HisabDo Knowledge Asset Metadata",
+    "type": "object",
+    "required": [
+      "document_id",
+      "title",
+      "section",
+      "category",
+      "source_url",
+      "language",
+      "last_updated_date",
+      "product_module",
+      "content",
+      "approval_status",
+      "source_owner",
+      "privacy_review"
+    ],
+    "properties": {
+      "document_id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "section": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string",
+        "enum": [
+          "faq",
+          "workflow_guide",
+          "feature_guide",
+          "accounting_feature_table",
+          "security",
+          "user_documentation",
+          "policy",
+          "other"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "uri"
+      },
+      "language": {
+        "type": "string",
+        "description": "BCP-47 language tag or explicit mixed-language label"
+      },
+      "last_updated_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "format": "date"
+      },
+      "product_module": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_owner": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_version": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "approval_status": {
+        "type": "string",
+        "enum": [
+          "approved",
+          "pending",
+          "rejected",
+          "unknown"
+        ]
+      },
+      "privacy_review": {
+        "type": "string",
+        "enum": [
+          "approved",
+          "pending",
+          "not_applicable",
+          "rejected"
+        ]
+      },
+      "content": {
+        "type": "string"
+      },
+      "query_aliases": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "content_status": {
+        "type": "string",
+        "enum": [
+          "active",
+          "quarantined",
+          "superseded",
+          "deleted"
+        ]
+      },
+      "content_hash_sha256": {
+        "type": "string"
+      }
+    }
+  },
+  "records": [
+    {
+      "document_id": "faq-001",
+      "title": "What is HisabDo?",
+      "section": "General / product overview",
+      "category": "faq",
+      "source_url": "https://hisabdo.app/faq",
+      "language": "en",
+      "last_updated_date": null,
+      "product_module": "unknown",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "HisabDo is an expense management assistant intended to help users organize expense-related information. Confirm its exact features against official product documentation before publishing this answer.",
+      "query_aliases": [
+        "What does HisabDo do?",
+        "What is the purpose of HisabDo?",
+        "Explain HisabDo",
+        "HisabDo kya hai?",
+        "HisabDo kis kaam aata hai?",
+        "Mujhe HisabDo ke bare mein batao"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "7c3ab9348e2c95546a285d0b1a2e44c1daf5098c2562c32f4024cd7f6e90f430"
+    },
+    {
+      "document_id": "faq-002",
+      "title": "How can I track an expense?",
+      "section": "Expense entry / workflow",
+      "category": "faq",
+      "source_url": "https://hisabdo.app/faq",
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Expense entry (module inferred from wording; confirm)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "Use the expense-entry workflow available in the deployed HisabDo application to record an expense. The exact fields and steps depend on the current implementation and must be verified against the application.",
+      "query_aliases": [
+        "How do I record an expense?",
+        "How can I add a new expense?",
+        "How do I manage my spending?",
+        "How can I track my expenses?",
+        "Main apna expense kaise record karun?",
+        "Kharcha kaise add karun?",
+        "Apne expenses ka record kaise rakhoon?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "775b86a301265662a1f17f920b74b0d69d4ac180aeb5f7770d46c85b7e75ba39"
+    },
+    {
+      "document_id": "faq-003",
+      "title": "What should I do if the chatbot does not know an answer?",
+      "section": "Chatbot fallback / safety",
+      "category": "faq",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Chatbot / RAG",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "If no sufficiently relevant, verified knowledge-base source is found, the chatbot should say it cannot confirm the answer and ask the user to clarify or consult the official support channel. It must not invent product details.",
+      "query_aliases": [
+        "Agar chatbot ko kisi sawal ka jawab nahi pata, to mujhe kya karna chahiye?",
+        "Agar bot answer nahi janta to main kya karun?",
+        "Chatbot ko jawab na mile to kya karna chahiye?",
+        "What if the chatbot cannot answer my question?",
+        "Bot ko meri baat samajh nahi aa rahi, ab kya karun?",
+        "What happens when no relevant source is found?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "5f7f8d269bae447fc4c9e30b405f7cc665e9f6d7f53c6ee839818d4bd8d70eb0"
+    },
+    {
+      "document_id": "security-001",
+      "title": "How can I protect my financial account?",
+      "section": "Account security",
+      "category": "security",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Account / authentication (confirm)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "Use a unique, strong password and enable multi-factor authentication if the application supports it. Never share passwords, one-time codes, or authentication tokens. Keep devices and browsers updated, sign out of shared devices, and report suspicious account activity through the official support channel. Verify the application's actual security features before making product-specific claims.",
+      "query_aliases": [
+        "How do I secure my account?",
+        "How can I keep my financial information safe?",
+        "How do I protect my expense management account?",
+        "How can I prevent unauthorized access?",
+        "Apna financial account secure kaise karun?",
+        "Account ko hackers se kaise bachaoon?",
+        "Meri financial information safe kaise rahegi?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "bb4a48360259d8d9fac81ce592530c8bb999939e90ec39eccea8535376e2b724"
+    },
+    {
+      "document_id": "security-002",
+      "title": "How should passwords be protected?",
+      "section": "Password security",
+      "category": "security",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Authentication (product implementation unverified)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "Applications should not store passwords in plain text. Passwords should be processed with a suitable password-hashing algorithm and appropriate parameters, such as Argon2id or an appropriately configured bcrypt implementation. Password verification should use the corresponding password-hashing library. Review the actual backend implementation before claiming that HisabDo follows these practices.",
+      "query_aliases": [
+        "How should an application store passwords?",
+        "Are passwords stored as plain text?",
+        "How can I protect user passwords?",
+        "Password security best practices",
+        "Passwords ko securely kaise store karna chahiye?",
+        "Plain text password kyun unsafe hai?",
+        "User password ko hash kaise karte hain?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "040289603271868a61525f58b2255172106d086c30b8494f08adb7b169594029"
+    },
+    {
+      "document_id": "security-003",
+      "title": "How should authentication tokens be protected?",
+      "section": "Token security",
+      "category": "security",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Authentication / token handling (confirm)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "Authentication tokens should be protected from disclosure and unauthorized use. Use HTTPS in deployed environments, keep signing secrets out of source control, validate token signatures and relevant claims on the server, and apply suitable expiration and revocation strategies. Development-only token endpoints should not be exposed in production. Confirm the application's token validation, secret management, and endpoint configuration before claiming these controls are implemented.",
+      "query_aliases": [
+        "How do I secure a JWT token?",
+        "What is JWT security?",
+        "How should access tokens be handled?",
+        "How can token theft be prevented?",
+        "JWT token ko secure kaise karun?",
+        "Authentication token kisi ke saath share karna chahiye?",
+        "Demo token endpoint ko kaise secure karein?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "ebd3154563f174713f5ce6426d9921383b08e7f7c14ed39846a58c26fb06dd48"
+    },
+    {
+      "document_id": "security-004",
+      "title": "What should I do about suspicious financial activity?",
+      "section": "Suspicious activity / incident guidance",
+      "category": "security",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Account security (HisabDo module not established)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "If you notice suspicious activity, contact the relevant financial institution or official service support promptly. If banking or payment credentials may be compromised, contact the institution using a trusted official channel and follow its instructions to secure the account. Change compromised passwords from a trusted device and review recent account activity. Do not share authentication codes or passwords with anyone claiming to provide support.",
+      "query_aliases": [
+        "What if I see an unauthorized transaction?",
+        "How do I report suspicious account activity?",
+        "Someone accessed my financial account",
+        "What should I do if my account is compromised?",
+        "Agar suspicious transaction nazar aaye to kya karun?",
+        "Mere account mein unauthorized activity ho rahi hai",
+        "Agar account hack ho jaye to kya karna chahiye?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "2d30b9fba87fa39ddab373dc8f7247714ab30f9dcea5f096ca842343347a7b63"
+    },
+    {
+      "document_id": "security-005",
+      "title": "How can an application reduce unauthorized login attempts?",
+      "section": "Login security / abuse prevention",
+      "category": "security",
+      "source_url": null,
+      "language": "en + Roman Urdu aliases",
+      "last_updated_date": null,
+      "product_module": "Authentication / login (confirm)",
+      "source_owner": null,
+      "source_version": "1.1.0",
+      "approval_status": "pending",
+      "privacy_review": "pending",
+      "content": "Authentication endpoints should use appropriately configured rate limiting and abuse protections. Applications should validate credentials on the server, avoid revealing whether a username or password was incorrect in a way that enables account enumeration, and monitor suspicious login activity. The exact controls and thresholds must be selected for the application's risk and architecture. Verify the deployed backend before claiming these protections are active.",
+      "query_aliases": [
+        "How do I prevent brute-force login attacks?",
+        "Why is login rate limiting important?",
+        "How should login attempts be limited?",
+        "How can I secure a login API?",
+        "Login attempts par rate limiting kyun lagani chahiye?",
+        "Brute force attack se login ko kaise bachayein?",
+        "Demo login endpoint ko production mein kaise restrict karein?"
+      ],
+      "content_status": "quarantined",
+      "content_hash_sha256": "93b74b2d9d8490e3b1d2add26d818abdc544f5e648d4a640dfa11179a3819886"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+HISABDO DEPARTMENT 3 — INGESTION / UPDATE INSTRUCTIONS
+Version: 1.0 | Prepared: 2026-11-10
+
+IMPORTANT
+The supplied 8 records are normalized staging records only. They remain quarantined and are NOT approved for production indexing.
+
+1. Register source
+- Assign a real source owner.
+- Record authoritative URL, source version, language, last updated date and product module.
+- Obtain explicit content approval and privacy review.
+- Never infer approval from verified=true or from a URL being present.
+
+2. Fetch and snapshot
+- Fetch only authorized sources.
+- Save raw source snapshot and fetch timestamp.
+- Capture failed URL, HTTP status/error, retry count and extraction error.
+
+3. Clean and normalize
+- Remove repeated navigation, stale page chrome and promotional filler only when confirmed to be boilerplate.
+- Preserve all product instructions, warnings, conditions, table headings and meaning.
+- Store query aliases separately from body text.
+- Compute SHA-256 content hash.
+- Detect duplicate IDs and duplicate content; record merge/archive decision rather than silently deleting.
+
+4. Chunk
+Recommended starting values (not benchmark-validated):
+- FAQ: 150–300 tokens, 0–20 overlap; keep question and answer together.
+- Accounting tables: 200–450 tokens, 0–30 overlap; repeat headers and preserve units/row groups.
+- Workflow: 300–500 tokens, 40–60 overlap; keep prerequisites, ordered steps and outcomes together.
+- Long-form docs: 450–700 tokens, 60–100 overlap; split on heading boundaries and retain parent heading path.
+
+5. Embed and index
+- Current project context names sentence-transformers/all-MiniLM-L6-v2 and threshold 0.42.
+- Pin an immutable model commit SHA and tokenizer revision before reproducible builds.
+- Record Python, sentence-transformers, transformers, torch, numpy versions.
+- Verify embedding dimension at runtime (expected 384 for this model family).
+- Record similarity metric, normalization, index type, distance settings and threshold.
+- Do not silently alter the existing threshold; evaluate with a labelled query set first.
+
+6. Incremental update
+- Maintain a manifest keyed by source URL + source version/hash.
+- New source: fetch, validate, normalize, chunk, embed, upsert.
+- Modified source: compare hash; create new version, replace old chunks atomically after validation.
+- Deleted source: mark tombstone and remove associated vectors after confirming source deletion.
+- Failed fetch/parse/embed: retain prior valid indexed version; log failure for retry.
+
+7. Execution log fields
+run_id, started_at, completed_at, source_url, source_owner, source_version,
+source_hash, action(new/modified/deleted/unchanged), fetch_status, parse_status,
+duplicate_status, chunk_count, embedding_model_revision, vector_status,
+error_code, error_message, reviewer, release_status.
+
+8. Release gate
+Only index records with explicit approval, verified authoritative source, complete metadata,
+privacy_review=approved and current review date. Keep all unresolved records quarantined.
