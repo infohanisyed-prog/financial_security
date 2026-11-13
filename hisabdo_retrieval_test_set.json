@@ -1,0 +1,754 @@
+{
+  "dataset_name": "HisabDo Retrieval Evaluation Set",
+  "dataset_version": "2.0.0",
+  "created_date": "2026-11-12",
+  "total_questions": 50,
+  "diagnostic_supported_source_match_questions": 40,
+  "unsupported_questions": 10,
+  "languages": {
+    "English": 32,
+    "Roman Urdu": 18
+  },
+  "top_k": 3,
+  "source_kb_version": "1.1.0",
+  "provenance_notice": "All questions are synthetic evaluation cases reconstructed from the supplied 8-document KB and audit evidence. They are NOT recovered historical Day 1 failed questions or real user feedback. Expected source IDs indicate diagnostic relevance only, not production approval.",
+  "production_safety_notice": "The supplied audit register reports all 8 KB records as pending and not indexing-eligible. Use this dataset only for offline diagnostic retrieval evaluation. Do not treat retrieved unapproved documents as authoritative answers or enable production indexing.",
+  "scoring_guidance": {
+    "retrieval": "For rows with expected_source_ids, measure Recall@3, MRR and nDCG@3 against those IDs.",
+    "unsupported": "For rows with empty expected_source_ids, measure whether the answer pipeline abstains; a diagnostic retrieval hit alone is not proof that an answer is supported.",
+    "answer_quality": "Separately compare generated answers against expected_answer_points and verify citations.",
+    "caveat": "Do not interpret perfect retrieval scores on this small synthetic set as production accuracy."
+  },
+  "questions": [
+    {
+      "id": "HDO-EVAL-001",
+      "query": "What is HisabDo?",
+      "language": "en",
+      "topic": "product_overview",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "expected_answer_points": [
+        "HisabDo is an expense-management assistant intended to help users organize expense-related information; exact features need official verification."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-002",
+      "query": "What does the HisabDo application help users organize?",
+      "language": "en",
+      "topic": "product_overview",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "expected_answer_points": [
+        "Expense-related information."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-003",
+      "query": "HisabDo kis kaam aata hai?",
+      "language": "ur-rom",
+      "topic": "product_overview",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "expected_answer_points": [
+        "HisabDo expense-related information organize karne ke liye intended expense-management assistant hai; exact features official documentation se verify honi chahiye."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-004",
+      "query": "Mujhe HisabDo ke bare mein batao.",
+      "language": "ur-rom",
+      "topic": "product_overview",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "expected_answer_points": [
+        "It is intended to help users organize expense-related information; do not claim unverified features."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-005",
+      "query": "What is the main purpose of HisabDo?",
+      "language": "en",
+      "topic": "product_overview",
+      "expected_source_ids": [
+        "faq-001"
+      ],
+      "expected_answer_points": [
+        "To help users organize expense-related information; exact product capabilities remain unverified."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-006",
+      "query": "How can I track an expense in HisabDo?",
+      "language": "en",
+      "topic": "expense_workflow",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "expected_answer_points": [
+        "Use the expense-entry workflow in the deployed application; exact fields and steps must be checked in the current app."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-007",
+      "query": "Where do I record a new expense?",
+      "language": "en",
+      "topic": "expense_workflow",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "expected_answer_points": [
+        "Use the expense-entry workflow available in the deployed HisabDo application; exact navigation is not specified in the KB."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-008",
+      "query": "Main apna kharcha HisabDo mein kaise record karun?",
+      "language": "ur-rom",
+      "topic": "expense_workflow",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "expected_answer_points": [
+        "Deployed application ka expense-entry workflow use karein; exact fields aur steps app mein verify karne honge."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-009",
+      "query": "Kharcha add karne ka tareeqa kya hai?",
+      "language": "ur-rom",
+      "topic": "expense_workflow",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "expected_answer_points": [
+        "Use the app's expense-entry workflow; the KB does not confirm exact screen-by-screen instructions."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-010",
+      "query": "How do I keep a record of my spending with HisabDo?",
+      "language": "en",
+      "topic": "expense_workflow",
+      "expected_source_ids": [
+        "faq-002"
+      ],
+      "expected_answer_points": [
+        "Record expenses through the deployed app's expense-entry workflow; exact implementation details require verification."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-011",
+      "query": "What should the chatbot do when it cannot find a reliable answer?",
+      "language": "en",
+      "topic": "safe_fallback",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "expected_answer_points": [
+        "Say it cannot confirm the answer; ask the user to clarify or consult official support; do not invent details."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-012",
+      "query": "Should the chatbot guess if no verified source is available?",
+      "language": "en",
+      "topic": "safe_fallback",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "expected_answer_points": [
+        "No. It must not invent product details and should state that it cannot confirm the answer."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-013",
+      "query": "Agar chatbot ko jawab nahi pata to kya karna chahiye?",
+      "language": "ur-rom",
+      "topic": "safe_fallback",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "expected_answer_points": [
+        "Bot ko kehna chahiye ke woh jawab confirm nahi kar sakta; clarification maange ya official support se rabta karne ko kahe."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-014",
+      "query": "What happens when no relevant verified knowledge-base source is found?",
+      "language": "en",
+      "topic": "safe_fallback",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "expected_answer_points": [
+        "The chatbot should disclose that it cannot confirm the answer and ask for clarification or direct the user to official support."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-015",
+      "query": "Bot meri baat ka jawab confirm nahi kar pa raha, ab kya hoga?",
+      "language": "ur-rom",
+      "topic": "safe_fallback",
+      "expected_source_ids": [
+        "faq-003"
+      ],
+      "expected_answer_points": [
+        "It should not guess; it should ask for clarification or recommend the official support channel."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-016",
+      "query": "How can I protect my financial account?",
+      "language": "en",
+      "topic": "account_protection",
+      "expected_source_ids": [
+        "security-001"
+      ],
+      "expected_answer_points": [
+        "Use a unique strong password; enable MFA if supported; never share passwords, one-time codes, or tokens; keep devices updated; sign out of shared devices; report suspicious activity through official support."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-017",
+      "query": "What are general steps to keep my expense account secure?",
+      "language": "en",
+      "topic": "account_protection",
+      "expected_source_ids": [
+        "security-001"
+      ],
+      "expected_answer_points": [
+        "Use a unique strong password; MFA if supported; do not share credentials or codes; update devices; sign out of shared devices; report suspicious activity."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-018",
+      "query": "Apna financial account secure kaise karun?",
+      "language": "ur-rom",
+      "topic": "account_protection",
+      "expected_source_ids": [
+        "security-001"
+      ],
+      "expected_answer_points": [
+        "Strong unique password use karein; MFA agar app support karti ho; password/OTP/token share na karein; devices update rakhein; suspicious activity official support ko report karein."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-019",
+      "query": "Should I share my one-time code with someone claiming to be support?",
+      "language": "en",
+      "topic": "account_protection",
+      "expected_source_ids": [
+        "security-001"
+      ],
+      "expected_answer_points": [
+        "No. Never share one-time codes, passwords, or authentication tokens."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-020",
+      "query": "Shared computer par HisabDo use karne ke baad kya karna chahiye?",
+      "language": "ur-rom",
+      "topic": "account_protection",
+      "expected_source_ids": [
+        "security-001"
+      ],
+      "expected_answer_points": [
+        "Shared device se sign out karein; credentials aur authentication codes kisi ke saath share na karein."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-021",
+      "query": "Should an application store passwords in plain text?",
+      "language": "en",
+      "topic": "password_security",
+      "expected_source_ids": [
+        "security-002"
+      ],
+      "expected_answer_points": [
+        "No. Passwords should not be stored in plain text; use a suitable password-hashing algorithm and verify using the corresponding library."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-022",
+      "query": "Which password storage approaches are mentioned in the knowledge base?",
+      "language": "en",
+      "topic": "password_security",
+      "expected_source_ids": [
+        "security-002"
+      ],
+      "expected_answer_points": [
+        "Suitable password hashing such as Argon2id or appropriately configured bcrypt; actual HisabDo implementation must be reviewed before making claims."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-023",
+      "query": "Passwords ko plain text mein store karna safe hai?",
+      "language": "ur-rom",
+      "topic": "password_security",
+      "expected_source_ids": [
+        "security-002"
+      ],
+      "expected_answer_points": [
+        "Nahi. Passwords plain text mein store nahi karne chahiye; suitable password-hashing algorithm use hona chahiye."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-024",
+      "query": "How should a backend verify a user's password?",
+      "language": "en",
+      "topic": "password_security",
+      "expected_source_ids": [
+        "security-002"
+      ],
+      "expected_answer_points": [
+        "Use the corresponding password-hashing library to verify the submitted password against the stored password hash."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-025",
+      "query": "Kya hum keh sakte hain ke HisabDo Argon2id use karta hai?",
+      "language": "ur-rom",
+      "topic": "password_security",
+      "expected_source_ids": [
+        "security-002"
+      ],
+      "expected_answer_points": [
+        "Not from this KB alone. The actual backend must be reviewed before claiming which algorithm HisabDo uses."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-026",
+      "query": "How should JWT authentication tokens be protected?",
+      "language": "en",
+      "topic": "token_security",
+      "expected_source_ids": [
+        "security-003"
+      ],
+      "expected_answer_points": [
+        "Protect tokens from disclosure; use HTTPS in deployment; keep signing secrets out of source control; validate signatures and claims; use suitable expiry and revocation; do not expose development-only token endpoints in production."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-027",
+      "query": "Should signing secrets be committed to source control?",
+      "language": "en",
+      "topic": "token_security",
+      "expected_source_ids": [
+        "security-003"
+      ],
+      "expected_answer_points": [
+        "No. Keep signing secrets out of source control."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-028",
+      "query": "JWT token ko secure kaise karna chahiye?",
+      "language": "ur-rom",
+      "topic": "token_security",
+      "expected_source_ids": [
+        "security-003"
+      ],
+      "expected_answer_points": [
+        "Token ko disclose na karein; HTTPS use karein; signing secrets source control se bahar rakhein; server par signature aur claims validate karein; expiry/revocation strategy rakhein."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-029",
+      "query": "What should a server check when validating an authentication token?",
+      "language": "en",
+      "topic": "token_security",
+      "expected_source_ids": [
+        "security-003"
+      ],
+      "expected_answer_points": [
+        "Validate the token signature and relevant claims on the server."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-030",
+      "query": "Development-only token endpoint production mein expose karna chahiye?",
+      "language": "ur-rom",
+      "topic": "token_security",
+      "expected_source_ids": [
+        "security-003"
+      ],
+      "expected_answer_points": [
+        "No. Development-only token endpoints should not be exposed in production."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-031",
+      "query": "What should I do if I notice suspicious financial activity?",
+      "language": "en",
+      "topic": "suspicious_activity",
+      "expected_source_ids": [
+        "security-004"
+      ],
+      "expected_answer_points": [
+        "Contact the relevant financial institution or official service support promptly; use trusted official channels; secure potentially compromised credentials; review recent activity; never share codes or passwords."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-032",
+      "query": "I see a transaction I did not authorize. What should I do?",
+      "language": "en",
+      "topic": "suspicious_activity",
+      "expected_source_ids": [
+        "security-004"
+      ],
+      "expected_answer_points": [
+        "Contact the relevant financial institution or official support promptly using a trusted channel and follow its instructions to secure the account."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-033",
+      "query": "Agar suspicious transaction nazar aaye to kya karun?",
+      "language": "ur-rom",
+      "topic": "suspicious_activity",
+      "expected_source_ids": [
+        "security-004"
+      ],
+      "expected_answer_points": [
+        "Relevant financial institution ya official service support se trusted official channel par foran rabta karein."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-034",
+      "query": "What if my banking credentials may have been compromised?",
+      "language": "en",
+      "topic": "suspicious_activity",
+      "expected_source_ids": [
+        "security-004"
+      ],
+      "expected_answer_points": [
+        "Contact the institution through a trusted official channel; follow its account-security instructions; change compromised passwords from a trusted device."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-035",
+      "query": "Kya support ke naam par maangne wale ko OTP dena chahiye?",
+      "language": "ur-rom",
+      "topic": "suspicious_activity",
+      "expected_source_ids": [
+        "security-004"
+      ],
+      "expected_answer_points": [
+        "Nahi. Authentication codes ya passwords kisi ko share na karein."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-036",
+      "query": "How can an application reduce unauthorized login attempts?",
+      "language": "en",
+      "topic": "login_protection",
+      "expected_source_ids": [
+        "security-005"
+      ],
+      "expected_answer_points": [
+        "Use appropriately configured rate limiting and abuse protections; validate credentials server-side; avoid revealing details that enable account enumeration; monitor suspicious login activity."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-037",
+      "query": "Why is rate limiting important on login endpoints?",
+      "language": "en",
+      "topic": "login_protection",
+      "expected_source_ids": [
+        "security-005"
+      ],
+      "expected_answer_points": [
+        "It helps limit abuse and brute-force attempts; exact thresholds depend on application risk and architecture."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-038",
+      "query": "Login attempts par rate limiting kyun lagani chahiye?",
+      "language": "ur-rom",
+      "topic": "login_protection",
+      "expected_source_ids": [
+        "security-005"
+      ],
+      "expected_answer_points": [
+        "Login endpoint ke abuse aur repeated unauthorized attempts ko limit karne ke liye; exact limits system ke risk aur architecture par depend karti hain."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-039",
+      "query": "Should an API reveal whether the username or password was incorrect?",
+      "language": "en",
+      "topic": "login_protection",
+      "expected_source_ids": [
+        "security-005"
+      ],
+      "expected_answer_points": [
+        "Avoid responses that reveal information in a way that enables account enumeration."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-040",
+      "query": "Brute-force login attempts ko reduce karne ke liye kya controls hain?",
+      "language": "ur-rom",
+      "topic": "login_protection",
+      "expected_source_ids": [
+        "security-005"
+      ],
+      "expected_answer_points": [
+        "Appropriately configured rate limiting, abuse protections, server-side credential validation, and monitoring suspicious login activity."
+      ],
+      "support_status": "diagnostic_source_match_only",
+      "provenance": "synthetic_reconstruction_from_existing_kb",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-041",
+      "query": "Does HisabDo automatically sync transactions from every bank?",
+      "language": "en",
+      "topic": "bank_integrations",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-042",
+      "query": "What is the exact monthly subscription price of HisabDo?",
+      "language": "en",
+      "topic": "pricing",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-043",
+      "query": "Can HisabDo generate FBR tax returns automatically?",
+      "language": "en",
+      "topic": "tax_filing",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-044",
+      "query": "HisabDo mein expense add karte waqt exact kaun se fields fill karne hote hain?",
+      "language": "ur-rom",
+      "topic": "expense_fields",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-045",
+      "query": "Does HisabDo support automatic currency conversion?",
+      "language": "en",
+      "topic": "currency_conversion",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-046",
+      "query": "Can I export my expenses directly to Excel or PDF?",
+      "language": "en",
+      "topic": "export_formats",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-047",
+      "query": "HisabDo mobile app Android aur iPhone dono par available hai?",
+      "language": "ur-rom",
+      "topic": "mobile_app_availability",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-048",
+      "query": "Does the app send automatic budget-limit notifications?",
+      "language": "en",
+      "topic": "budget_alerts",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-049",
+      "query": "What is the official customer-support phone number for HisabDo?",
+      "language": "en",
+      "topic": "support_phone",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    },
+    {
+      "id": "HDO-EVAL-050",
+      "query": "Can HisabDo import historical transactions from a bank statement?",
+      "language": "en",
+      "topic": "statement_import",
+      "expected_source_ids": [],
+      "expected_answer_points": [
+        "No matching approved source in the supplied 8-document KB; chatbot should abstain and request clarification or direct the user to official support."
+      ],
+      "support_status": "unsupported_by_current_kb",
+      "provenance": "synthetic_reconstruction_from_known_coverage_gaps",
+      "historical_day1_failure": false
+    }
+  ]
+}

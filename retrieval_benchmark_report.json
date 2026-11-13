@@ -1,0 +1,94 @@
+{
+  "notice": "Synthetic/proposed diagnostic benchmark; not historical Day 1 results. Diagnostic hits are not approved production evidence.",
+  "top_k": 3,
+  "test_questions": 50,
+  "supported_questions": 40,
+  "unsupported_questions": 10,
+  "production_eligible_documents": 0,
+  "variants": [
+    {
+      "name": "Dense baseline",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.825,
+        "mrr": 0.825,
+        "ndcg_at_k": 0.825
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 3,
+      "errors": []
+    },
+    {
+      "name": "Hybrid baseline",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.975,
+        "mrr": 0.9375,
+        "ndcg_at_k": 0.9473
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 10,
+      "errors": []
+    },
+    {
+      "name": "Hybrid + rerank",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.975,
+        "mrr": 0.9375,
+        "ndcg_at_k": 0.9473
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 10,
+      "errors": []
+    },
+    {
+      "name": "Hybrid + metadata filter",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.975,
+        "mrr": 0.9625,
+        "ndcg_at_k": 0.9658
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 10,
+      "errors": []
+    },
+    {
+      "name": "Hybrid + query normalization",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.95,
+        "mrr": 0.925,
+        "ndcg_at_k": 0.9315
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 10,
+      "errors": []
+    },
+    {
+      "name": "Hybrid alpha 0.25",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.975,
+        "mrr": 0.9375,
+        "ndcg_at_k": 0.9473
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 10,
+      "errors": []
+    },
+    {
+      "name": "Hybrid alpha 0.75",
+      "metrics": {
+        "queries": 40,
+        "recall_at_k": 0.9,
+        "mrr": 0.8875,
+        "ndcg_at_k": 0.8908
+      },
+      "unsupported_queries": 10,
+      "unsupported_with_any_diagnostic_hit": 9,
+      "errors": []
+    }
+  ]
+}
