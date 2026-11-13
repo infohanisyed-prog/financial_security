@@ -1,0 +1,81 @@
+
+{
+  "transcript_type": "deterministic_context_tests",
+  "status": "simulated_not_live_chatbot",
+  "scenarios": [
+    {
+      "id": "MT-001",
+      "journey": "Expense summary",
+      "turns": [
+        {
+          "user": "Show my expenses",
+          "context_update": {
+            "intent": "expense_summary"
+          }
+        },
+        {
+          "user": "Only food expenses",
+          "context_update": {
+            "category": "food"
+          }
+        },
+        {
+          "user": "For this month",
+          "context_update": {
+            "date_range": "this_month"
+          }
+        }
+      ],
+      "expected_context": {
+        "intent": "expense_summary",
+        "category": "food",
+        "date_range": "this_month"
+      }
+    },
+    {
+      "id": "MT-002",
+      "journey": "Budget summary",
+      "turns": [
+        {
+          "user": "Show my budget",
+          "context_update": {
+            "intent": "budget_summary"
+          }
+        },
+        {
+          "user": "For this month",
+          "context_update": {
+            "period_label": "this_month"
+          }
+        }
+      ],
+      "expected_context": {
+        "intent": "budget_summary",
+        "period_label": "this_month"
+      }
+    },
+    {
+      "id": "MT-003",
+      "journey": "Product help",
+      "turns": [
+        {
+          "user": "How do I create an expense?",
+          "context_update": {
+            "intent": "product_help",
+            "last_topic": "expense_creation"
+          }
+        },
+        {
+          "user": "What about editing it?",
+          "context_update": {
+            "last_topic": "expense_editing"
+          }
+        }
+      ],
+      "expected_context": {
+        "intent": "product_help",
+        "last_topic": "expense_editing"
+      }
+    }
+  ]
+}
