@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field
 
 from semantic_search import SemanticKnowledgeBase, DEFAULT_THRESHOLD
 from rag_service import RAGService
+from llm_service import LLMService
+from chat_service import ChatService
 
 ROOT = Path(__file__).resolve().parent
 KB_PATH = ROOT / "knowledge_base.json"
@@ -14,9 +16,15 @@ KB_PATH = ROOT / "knowledge_base.json"
 app = FastAPI(title="HisabDo Semantic KB API", version="1.0.0")
 kb = SemanticKnowledgeBase(kb_path=KB_PATH, threshold=DEFAULT_THRESHOLD)
 rag = RAGService(kb)
+chat = ChatService(rag, LLMService())
 
 
 class SearchRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=2000)
+    top_k: int = Field(default=3, ge=1, le=10)
+
+
+class ChatRequest(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
     top_k: int = Field(default=3, ge=1, le=10)
 
@@ -35,6 +43,12 @@ def health():
 @app.post("/search")
 def search(request: SearchRequest):
     return rag.retrieve(request.question, top_k=request.top_k)
+
+
+@app.post("/chat")
+def chat_endpoint(request: ChatRequest):
+    """Generate an answer only from approved retrieval context and validated citations."""
+    return chat.answer(request.question, top_k=request.top_k)
 
 
 @app.post("/reload-kb")

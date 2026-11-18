@@ -1,4 +1,3 @@
-
 """Defense-in-depth safety checks for HisabDo conversations."""
 
 import re
@@ -48,11 +47,13 @@ def inspect_message(message: str) -> SafetyResult:
 
 
 def inspect_support_request(message: str) -> SafetyResult:
-    if not isinstance(message, str) or not message.strip():
-        return SafetyResult(False, "empty_message")
+    # Run safety checks before escalation classification so that a support
+    # phrase cannot make an otherwise unsafe message permissible.
+    safety_result = inspect_message(message)
+    if not safety_result.allowed:
+        return safety_result
 
     normalized = message.lower()
-
     support_phrases = [
         "human support",
         "talk to an agent",
@@ -69,4 +70,4 @@ def inspect_support_request(message: str) -> SafetyResult:
             escalation_required=True,
         )
 
-    return inspect_message(message)
+    return safety_result
